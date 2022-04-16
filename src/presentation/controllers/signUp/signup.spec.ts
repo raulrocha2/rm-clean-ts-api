@@ -19,9 +19,9 @@ const makeAddAccount = (): IAddAccount => {
     add(account: IAddAccountModel): IAccountModel {
       const fakeAccount = {
         id: 'valid_id',
-        name: 'any name',
-        email: 'any_email@mail.com',
-        password: 'any_password'
+        name: 'valid_name',
+        email: 'valid_email@mail.com',
+        password: 'valid_password'
       }
       return fakeAccount
     }
@@ -212,5 +212,26 @@ describe('SingUp Controller', () => {
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse.body).toEqual(new ServerError())
+  });
+
+  test('Should return 201 if valid data Account is provided', () => {
+    //System Under Test
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'valid_name',
+        email: 'valid_email@mail.com',
+        password: 'valid_password',
+        passwordConfirm: 'valid_password'
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(201)
+    expect(httpResponse.body).toEqual({
+      id: "valid_id",
+      name: 'valid_name',
+      email: 'valid_email@mail.com',
+      password: 'valid_password'
+    })
   });
 })
