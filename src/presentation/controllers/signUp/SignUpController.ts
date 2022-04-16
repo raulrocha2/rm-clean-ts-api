@@ -1,7 +1,7 @@
-import { IAddAccount } from "../../domain/useCases/IAddAccount"
-import { InvalidParamError, MissingParamError } from "../error"
-import { badRequest, serverError } from "../helpers/httpHelper"
-import { IHttpRequest, IHttpResponse, IEmailValidator, IController } from "../protocols"
+import { InvalidParamError, MissingParamError } from "../../error"
+import { badRequest, serverError } from "../../helpers/httpHelper"
+import { IAddAccount, IController, IEmailValidator, IHttpRequest, IHttpResponse } from "./signUpProtocols"
+
 
 
 export class SignUpController implements IController {
