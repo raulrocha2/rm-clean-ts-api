@@ -1,6 +1,5 @@
-import { IAccountModel } from "../../../domain/models/Account";
-import { IAddAccount, IAddAccountModel } from "../../../domain/useCases/IAddAccount";
-import { IEncrypter } from "../../protocols/IEncrypter";
+import { IAccountModel, IAddAccount, IAddAccountModel, IEncrypter } from "./dbAddAccountProtocols"
+
 
 
 export class DbAddAccount implements IAddAccount {
