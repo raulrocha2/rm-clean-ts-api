@@ -1,5 +1,3 @@
-import { rejects } from "assert";
-import { resolve } from "path";
 import { IAccountModel } from "../../../domain/models/Account";
 import { IAddAccount, IAddAccountModel } from "../../../domain/useCases/IAddAccount";
 import { InvalidParamError, MissingParamError, ServerError } from "../../error";
