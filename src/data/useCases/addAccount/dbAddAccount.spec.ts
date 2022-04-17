@@ -1,7 +1,5 @@
-import { rejects } from "assert";
-import { resolve } from "path";
-import { IEncrypter } from "../../protocols/IEncrypter";
-import { DbAddAccount } from "./DbAddAccount"
+import { DbAddAccount } from "./DbAddAccount";
+import { IEncrypter } from "./dbAddAccountProtocols";
 
 class EncrypterStub implements IEncrypter {
   async encrypt(value: string): Promise<string> {
