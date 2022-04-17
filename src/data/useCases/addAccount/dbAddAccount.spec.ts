@@ -1,7 +1,7 @@
 import { IEncrypter } from "../../protocols/IEncrypter";
 import { DbAddAccount } from "./DbAddAccount"
 
-class EncrypterStub {
+class EncrypterStub implements IEncrypter {
   async encrypt(value: string): Promise<string> {
     return new Promise(resolve => resolve('hashed_password'))
   }
@@ -23,7 +23,6 @@ const makeSut = (): SutTypes => {
 
 describe('DbAddAccount UseCase', () => {
   test('Should call Encrypt with correct password', async () => {
-
     const { sut, encrypterStub } = makeSut()
     const encryptSpy = jest.spyOn(encrypterStub, 'encrypt')
     const accountData = {
@@ -33,5 +32,6 @@ describe('DbAddAccount UseCase', () => {
     }
     await sut.add(accountData)
     expect(encryptSpy).toHaveBeenCalledWith('valid_password')
-  })
+  });
+
 })
