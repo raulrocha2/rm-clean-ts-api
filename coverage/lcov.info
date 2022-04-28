@@ -44,7 +44,7 @@ FNF:3
 FNH:3
 FNDA:1,connect
 FNDA:1,disconnect
-FNDA:1,getCollection
+FNDA:2,getCollection
 DA:1,1
 DA:2,1
 DA:3,1
@@ -58,14 +58,14 @@ DA:10,1
 DA:11,1
 DA:12,1
 DA:13,1
-DA:14,1
-DA:15,1
+DA:14,2
+DA:15,2
 DA:16,1
 LF:16
 LH:16
 BRDA:6,0,0,1
 BRDA:9,1,0,1
-BRDA:13,2,0,1
+BRDA:13,2,0,2
 BRF:3
 BRH:3
 end_of_record
