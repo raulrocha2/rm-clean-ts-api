@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb";
 import { IAddAccountRepository } from "../../../../data/protocols/IAddAccountRepository";
 import { IAccountModel } from "../../../../domain/models/Account";
 import { IAddAccountModel } from "../../../../domain/useCases/IAddAccount";
@@ -10,16 +9,9 @@ export class AccountMongoRepository implements IAddAccountRepository {
     const accountCollection = MongoHelper.getCollection('accounts')
     const resultInsert = await accountCollection.insertOne(accountData)
     const account = await accountCollection.findOne(resultInsert.insertedId)
-    const { _id, name, email, password } = account
 
-    const accountCreated = {
-      id: _id.toString(),
-      name,
-      email,
-      password
-    }
+    return MongoHelper.map(account)
 
-    return accountCreated
   }
 
 }

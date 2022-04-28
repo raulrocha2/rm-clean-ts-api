@@ -1,4 +1,5 @@
 import { Collection, MongoClient } from 'mongodb'
+import { IAccountModel } from '../../../../domain/models/Account'
 
 export const MongoHelper = {
   mongoClient: null as MongoClient,
@@ -12,5 +13,12 @@ export const MongoHelper = {
 
   getCollection(name: string): Collection {
     return this.mongoClient.db().collection(name)
+  },
+
+  map(collection: any): any {
+    const { _id, ...objWithoutId } = collection
+    return Object.assign({}, objWithoutId, {
+      id: _id.toString(),
+    })
   }
 }
