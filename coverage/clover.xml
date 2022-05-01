@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1651176499024" clover="3.2.0">
-  <project timestamp="1651176499024" name="All files">
-    <metrics statements="41" coveredstatements="41" conditionals="5" coveredconditionals="5" methods="5" coveredmethods="5" elements="51" coveredelements="51" complexity="0" loc="41" ncloc="41" packages="2" files="2" classes="2"/>
-    <package name="accountRepository">
-      <metrics statements="17" coveredstatements="17" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
-      <file name="AccountMongoRepository.ts" path="/mnt/e2d6f786-c74c-4eed-8796-19c9c85a9c09/Documents/curso_patrico/nodejs/typescript/clean-node-api/src/infra/db/mongodb/accountRepository/AccountMongoRepository.ts">
-        <metrics statements="17" coveredstatements="17" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+<coverage generated="1651447037814" clover="3.2.0">
+  <project timestamp="1651447037814" name="All files">
+    <metrics statements="16" coveredstatements="16" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1" elements="18" coveredelements="18" complexity="0" loc="16" ncloc="16" packages="2" files="3" classes="3"/>
+    <package name="config">
+      <metrics statements="13" coveredstatements="13" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="app.ts" path="/mnt/e2d6f786-c74c-4eed-8796-19c9c85a9c09/Documents/curso_patrico/nodejs/typescript/clean-node-api/src/main/config/app.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -13,46 +13,24 @@
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
       </file>
-    </package>
-    <package name="helpers">
-      <metrics statements="24" coveredstatements="24" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
-      <file name="mongoHelper.ts" path="/mnt/e2d6f786-c74c-4eed-8796-19c9c85a9c09/Documents/curso_patrico/nodejs/typescript/clean-node-api/src/infra/db/mongodb/helpers/mongoHelper.ts">
-        <metrics statements="24" coveredstatements="24" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
+      <file name="middlewares.ts" path="/mnt/e2d6f786-c74c-4eed-8796-19c9c85a9c09/Documents/curso_patrico/nodejs/typescript/clean-node-api/src/main/config/middlewares.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
+        <line num="4" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="7" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="14" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="middleware">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="bodyParser.ts" path="/mnt/e2d6f786-c74c-4eed-8796-19c9c85a9c09/Documents/curso_patrico/nodejs/typescript/clean-node-api/src/main/middleware/bodyParser.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
       </file>
     </package>
   </project>
