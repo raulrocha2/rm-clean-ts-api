@@ -11,6 +11,5 @@ describe('Cors Middleware', () => {
       .expect('access-control-allow-origin', '*')
       .expect('access-control-allow-methods', '*')
       .expect('access-control-allow-headers', '*')
-
   })
 })
