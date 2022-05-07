@@ -6,7 +6,7 @@ import { EmailValidatorAdapter } from "../../utils/EmailValidatorAdapter";
 
 
 export const makeSignUpController = (): SignUpController => {
-  const salt = 20
+  const salt = 8
 
   const accountMongoRepository = new AccountMongoRepository()
   const emailValidatorAdapter = new EmailValidatorAdapter()
