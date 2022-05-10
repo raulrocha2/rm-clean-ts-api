@@ -1,17 +1,23 @@
 import { Collection, MongoClient } from 'mongodb'
-import { IAccountModel } from '../../../../domain/models/Account'
 
 export const MongoHelper = {
   mongoClient: null as MongoClient,
+  uri: null as string,
 
   async connect(uri: string): Promise<void> {
+    this.uri = uri
     this.mongoClient = await MongoClient.connect(uri)
   },
   async disconnect(): Promise<void> {
     await this.mongoClient.close()
   },
 
-  getCollection(name: string): Collection {
+  async getCollection(name: string): Promise<Collection> {
+
+    if (!this.mongoClient) {
+      await this.mongoClient.connect(this.uri)
+
+    }
     return this.mongoClient.db().collection(name)
   },
 
