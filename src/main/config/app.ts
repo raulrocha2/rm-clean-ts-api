@@ -3,9 +3,11 @@ import setUpMiddleware from './middlewares'
 import setupRoutes from './routes'
 import { TaskScheduleAdapter } from '../../utils/TaskScheduleAdapter'
 
-const taskScheduleAdapter = new TaskScheduleAdapter()
+const taskScheduleAPI = new TaskScheduleAdapter()
+const taskScheduleEmail = new TaskScheduleAdapter()
 
-taskScheduleAdapter.run('* * * * *', 'running my task')
+taskScheduleAPI.run('* * * * *', 'running my task')
+taskScheduleEmail.run('*/2 * * * *', 'send email')
 
 const app = express()
 setUpMiddleware(app)
