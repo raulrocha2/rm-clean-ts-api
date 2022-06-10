@@ -1,8 +1,7 @@
-import { IAuthentication } from "../../../../domain/useCases/IAuthentication";
 import { InvalidParamError, MissingParamError } from "../../../error";
 import { badRequest, serverError, unauthorized } from "../../../helpers/httpHelper";
-import { IHttpRequest, IHttpResponse, IController } from "../../../protocols";
-import { IEmailValidator } from "../signUpProtocols";
+import { IHttpRequest, IHttpResponse, IController, IEmailValidator, IAuthentication } from "./LoginProtocols";
+
 
 
 export class LoginController implements IController {
