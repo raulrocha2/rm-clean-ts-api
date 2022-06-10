@@ -1,8 +1,7 @@
 import { InvalidParamError, MissingParamError } from "../../../error";
-import { badRequest, serverError, unauthorized } from "../../../helpers/httpHelper";
+import { badRequest, ok, serverError, unauthorized } from "../../../helpers/httpHelper";
 import { IEmailValidator, IHttpRequest, IAuthentication } from "./LoginProtocols";
 import { LoginController } from "./login"
-import { rejects } from "assert";
 
 
 const makeEmailValidator = (): IEmailValidator => {
@@ -127,5 +126,12 @@ describe('Login controller', () => {
 
     const httpResponse = await sut.handle(makeFakeRequest());
     expect(httpResponse).toEqual(unauthorized());
+  })
+
+  test('Should return 200 if an valid credential are provider', async () => {
+    const { sut } = makeSut()
+
+    const httpResponse = await sut.handle(makeFakeRequest());
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }));
   })
 })
