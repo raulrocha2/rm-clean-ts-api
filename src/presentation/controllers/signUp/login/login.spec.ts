@@ -1,8 +1,6 @@
-import { resolve } from "path";
-import { IAuthentication } from "../../../../domain/useCases/IAuthentication";
-import { InvalidParamError, MissingParamError, UnauthorizedError } from "../../../error";
+import { InvalidParamError, MissingParamError } from "../../../error";
 import { badRequest, serverError, unauthorized } from "../../../helpers/httpHelper";
-import { IEmailValidator, IHttpRequest } from "../signUpProtocols";
+import { IEmailValidator, IHttpRequest, IAuthentication } from "./LoginProtocols";
 import { LoginController } from "./login"
 
 
