@@ -4,7 +4,7 @@ import { InvalidParamError, MissingParamError, ServerError } from "../../error";
 import { ok, serverError, badRequest } from "../../helpers/httpHelper";
 
 import { SignUpController } from "./SignUpController"
-import { IEmailValidator, IHttpRequest } from "./signUpProtocols";
+import { IEmailValidator, IHttpRequest, IValidation } from "./signUpProtocols";
 
 const makeEmailValidator = (): IEmailValidator => {
   class EmailValidatorStub implements IEmailValidator {
@@ -33,6 +33,16 @@ const makeAddAccount = (): IAddAccount => {
   return new AddAccountStub()
 }
 
+const makeValidation = (): IValidation => {
+  class ValidationStub implements IValidation {
+    validate(input: any): Error {
+      return null
+    }
+  }
+  return new ValidationStub()
+}
+
+
 const makeFakeRequest = (): IHttpRequest => ({
 
   body: {
@@ -48,16 +58,19 @@ interface SutTypes {
   sut: SignUpController;
   emailValidatorStub: IEmailValidator;
   addAccountStub: IAddAccount;
+  validationStub: IValidation;
 }
 
 const makeSut = (): SutTypes => {
   const addAccountStub = makeAddAccount()
   const emailValidatorStub = makeEmailValidator()
-  const sut = new SignUpController(emailValidatorStub, addAccountStub)
+  const validationStub = makeValidation()
+  const sut = new SignUpController(emailValidatorStub, addAccountStub, validationStub)
   return {
     sut,
     emailValidatorStub,
-    addAccountStub
+    addAccountStub,
+    validationStub
   }
 }
 
@@ -206,5 +219,14 @@ describe('SingUp Controller', () => {
     const httpRequest = makeFakeRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(ok(makeFakeAccount()))
+  });
+
+  test('Should call Validation with correct values', async () => {
+    //System Under Test SUT
+    const { sut, validationStub } = makeSut()
+    const validateSpy = jest.spyOn(validationStub, 'validate')
+    const httpRequest = makeFakeRequest()
+    await sut.handle(httpRequest)
+    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
   });
 })
