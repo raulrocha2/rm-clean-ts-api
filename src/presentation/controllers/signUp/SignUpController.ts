@@ -9,7 +9,6 @@ export class SignUpController implements IController {
 
 
   constructor(
-    private emailValidator: IEmailValidator,
     private addAccount: IAddAccount,
     private validation: IValidation
   ) { }
@@ -22,12 +21,6 @@ export class SignUpController implements IController {
       }
 
       const { name, email, password } = httpRequest.body;
-
-
-      const isValid = this.emailValidator.isValid(email)
-      if (!isValid) {
-        return badRequest(new InvalidParamError('email'))
-      }
 
       const account = await this.addAccount.add({
         name,
