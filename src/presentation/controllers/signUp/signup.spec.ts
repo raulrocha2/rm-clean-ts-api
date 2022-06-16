@@ -1,7 +1,9 @@
+
 import { IAccountModel } from "../../../domain/models/Account";
 import { IAddAccount, IAddAccountModel } from "../../../domain/useCases/IAddAccount";
 import { MissingParamError, ServerError } from "../../error";
-import { ok, badRequest } from "../../helpers/httpHelper";
+import { badRequest, ok } from "../../helpers/http/httpHelper";
+
 
 import { SignUpController } from "./SignUpController"
 import { IHttpRequest, IValidation } from "./signUpProtocols";

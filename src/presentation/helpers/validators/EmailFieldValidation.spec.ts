@@ -1,6 +1,5 @@
 import { InvalidParamError } from "../../error";
 import { IEmailValidator } from "../../protocols/IEmailValidator";
-import { badRequest } from "../httpHelper";
 import { EmailFieldValidation } from "./EmailFieldValidation";
 
 
