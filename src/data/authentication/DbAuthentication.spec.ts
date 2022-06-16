@@ -52,6 +52,6 @@ describe('DbAuthentication UseCase', () => {
     const { loadAccountByEmailRepository, sut } = makeSut()
     const loadSpy = jest.spyOn(loadAccountByEmailRepository, 'load')
     await sut.auth(makeFakeAuthentication())
-    expect(loadSpy).toHaveBeenCalledWith('any_email@mail.c')
+    expect(loadSpy).toHaveBeenCalledWith('any_email@mail.com')
   })
 })
