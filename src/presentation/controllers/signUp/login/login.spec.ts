@@ -1,5 +1,5 @@
 import { InvalidParamError, MissingParamError } from "../../../error";
-import { IEmailValidator, IHttpRequest, IAuthentication } from "./LoginProtocols";
+import { IEmailValidator, IHttpRequest, IAuthentication, IAuthenticationModel } from "./LoginProtocols";
 import { LoginController } from "./login"
 import { badRequest, ok, serverError, unauthorized } from "../../../helpers/http/httpHelper";
 
@@ -17,7 +17,7 @@ const makeEmailValidator = (): IEmailValidator => {
 
 const makeAuthentication = (): IAuthentication => {
   class AuthenticationStub implements IAuthentication {
-    async auth(email: string, password: string): Promise<string> {
+    async auth(authentication: IAuthenticationModel): Promise<string> {
       return 'any_token'
     }
   }
@@ -115,7 +115,10 @@ describe('Login controller', () => {
     const isAuthSpy = jest.spyOn(authenticationStub, 'auth')
 
     await sut.handle(makeFakeRequest());
-    expect(isAuthSpy).toHaveBeenCalledWith('any_email@test.com', 'any_password');
+    expect(isAuthSpy).toHaveBeenCalledWith({
+      email: 'any_email@test.com',
+      password: 'any_password'
+    });
   })
 
   test('Should return 401 if an invalid credential are provider', async () => {
