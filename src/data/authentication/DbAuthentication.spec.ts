@@ -1,6 +1,7 @@
 import { resolve } from "path"
 import { IAuthenticationModel } from "../../domain/useCases/IAuthentication"
 import { IHashComparer } from "../protocols/criptography/IHashComparer"
+import { ITokenGenerator } from "../protocols/criptography/ITokenGenerator"
 import { ILoadAccountByEmailRepository } from "../protocols/db/ILoadAccountByEmailRepository"
 
 import { IAccountModel, IAddAccountModel } from "../useCases/addAccount/dbAddAccountProtocols"
@@ -9,7 +10,7 @@ import { DbAuthentication } from "./DbAuthentication"
 
 const makeLoadAccountByEmailRepository = (): ILoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements ILoadAccountByEmailRepository {
-    async load(email: string): Promise<IAddAccountModel> {
+    async load(email: string): Promise<IAccountModel> {
       const account = makeFakeAccount()
       return new Promise(resolve => resolve(account))
     }
@@ -18,12 +19,21 @@ const makeLoadAccountByEmailRepository = (): ILoadAccountByEmailRepository => {
 }
 
 const makeHashComparer = (): IHashComparer => {
-  class hashComparerStub implements IHashComparer {
+  class HashComparerStub implements IHashComparer {
     async compare(value: string, hash: string): Promise<boolean> {
       return new Promise(resolve => resolve(true))
     }
   }
-  return new hashComparerStub()
+  return new HashComparerStub()
+}
+
+const makeTokenGenerator = (): ITokenGenerator => {
+  class TokenGeneratorStub implements ITokenGenerator {
+    async generate(id: string): Promise<string> {
+      return new Promise(resolve => resolve('any_token'))
+    }
+  }
+  return new TokenGeneratorStub()
 }
 
 const makeFakeAccount = (): IAccountModel => ({
@@ -38,20 +48,28 @@ const makeFakeAuthentication = (): IAuthenticationModel => ({
   password: 'any_password'
 })
 
+
 type SutTypes = {
   loadAccountByEmailRepository: ILoadAccountByEmailRepository,
   sut: DbAuthentication,
-  hashComparerStub: IHashComparer
+  hashComparerStub: IHashComparer,
+  tokenGeneratorStub: ITokenGenerator
 }
 
 const makeSut = (): SutTypes => {
   const loadAccountByEmailRepository = makeLoadAccountByEmailRepository()
   const hashComparerStub = makeHashComparer()
-  const sut = new DbAuthentication(loadAccountByEmailRepository, hashComparerStub)
+  const tokenGeneratorStub = makeTokenGenerator()
+  const sut = new DbAuthentication(
+    loadAccountByEmailRepository,
+    hashComparerStub,
+    tokenGeneratorStub
+  )
   return {
     loadAccountByEmailRepository,
     sut,
-    hashComparerStub
+    hashComparerStub,
+    tokenGeneratorStub
   }
 }
 
@@ -103,6 +121,13 @@ describe('DbAuthentication UseCase', () => {
     )
     const accessToken = await sut.auth(makeFakeAuthentication())
     expect(accessToken).toBeNull()
+  })
+
+  test('Should call TokenGenerator with correct ID', async () => {
+    const { tokenGeneratorStub, sut } = makeSut()
+    const generateSpy = jest.spyOn(tokenGeneratorStub, 'generate')
+    await sut.auth(makeFakeAuthentication())
+    expect(generateSpy).toHaveBeenCalledWith('any_id_123')
   })
 
 })
