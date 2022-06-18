@@ -1,3 +1,4 @@
+import { resolve } from "path"
 import { IAuthenticationModel } from "../../domain/useCases/IAuthentication"
 import { IHashComparer } from "../protocols/criptography/IHashComparer"
 import { ILoadAccountByEmailRepository } from "../protocols/db/ILoadAccountByEmailRepository"
@@ -93,6 +94,15 @@ describe('DbAuthentication UseCase', () => {
     )
     const promise = sut.auth(makeFakeAuthentication())
     await expect(promise).rejects.toThrow()
+  })
+
+  test('Should return null with HashComparer return false', async () => {
+    const { hashComparerStub, sut } = makeSut()
+    jest.spyOn(hashComparerStub, 'compare').mockReturnValueOnce(
+      new Promise(resolve => resolve(false))
+    )
+    const accessToken = await sut.auth(makeFakeAuthentication())
+    expect(accessToken).toBeNull()
   })
 
 })
