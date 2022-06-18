@@ -1,6 +1,5 @@
-import { IAuthentication } from "../../domain/useCases/IAuthentication";
-
 import {
+  IAuthentication,
   IAuthenticationModel,
   IHashComparer,
   ILoadAccountByEmailRepository,
