@@ -1,5 +1,6 @@
 import { IAuthenticationModel } from "../../domain/useCases/IAuthentication"
-import { ILoadAccountByEmailRepository } from "../protocols/ILoadAccountByEmailRepository"
+import { ILoadAccountByEmailRepository } from "../protocols/db/ILoadAccountByEmailRepository"
+
 import { IAccountModel, IAddAccountModel } from "../useCases/addAccount/dbAddAccountProtocols"
 import { DbAuthentication } from "./DbAuthentication"
 

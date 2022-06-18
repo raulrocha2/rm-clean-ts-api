@@ -1,5 +1,6 @@
 import { IAuthentication, IAuthenticationModel } from "../../domain/useCases/IAuthentication";
-import { ILoadAccountByEmailRepository } from "../protocols/ILoadAccountByEmailRepository";
+import { ILoadAccountByEmailRepository } from "../protocols/db/ILoadAccountByEmailRepository";
+
 
 export class DbAuthentication implements IAuthentication {
   constructor(
