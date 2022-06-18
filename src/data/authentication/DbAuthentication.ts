@@ -1,6 +1,6 @@
 import { IAuthentication, IAuthenticationModel } from "../../domain/useCases/IAuthentication";
-import { IHashComparer } from "../protocols/criptography/IHashComparer";
-import { ITokenGenerator } from "../protocols/criptography/ITokenGenerator";
+import { IHashComparer } from "../protocols/cryptography/IHashComparer";
+import { ITokenGenerator } from "../protocols/cryptography/ITokenGenerator";
 import { ILoadAccountByEmailRepository } from "../protocols/db/ILoadAccountByEmailRepository";
 import { IUpdateAccessTokenRepository } from "../protocols/db/IUpdateAccessTokenRepository";
 

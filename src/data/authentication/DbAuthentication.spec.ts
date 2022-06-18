@@ -1,12 +1,13 @@
-import { resolve } from "path"
-import { IAuthenticationModel } from "../../domain/useCases/IAuthentication"
-import { IHashComparer } from "../protocols/criptography/IHashComparer"
-import { ITokenGenerator } from "../protocols/criptography/ITokenGenerator"
-import { ILoadAccountByEmailRepository } from "../protocols/db/ILoadAccountByEmailRepository"
-import { IUpdateAccessTokenRepository } from "../protocols/db/IUpdateAccessTokenRepository"
 
-import { IAccountModel, IAddAccountModel } from "../useCases/addAccount/dbAddAccountProtocols"
 import { DbAuthentication } from "./DbAuthentication"
+import {
+  IAccountModel,
+  IAuthenticationModel,
+  IHashComparer,
+  ILoadAccountByEmailRepository,
+  ITokenGenerator,
+  IUpdateAccessTokenRepository
+} from "./DbAuthenticationProtocols"
 
 
 const makeLoadAccountByEmailRepository = (): ILoadAccountByEmailRepository => {
