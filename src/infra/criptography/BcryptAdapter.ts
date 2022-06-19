@@ -1,8 +1,9 @@
 
-import { IHasher } from '../../data/authentication/DbAuthenticationProtocols';
+import { IHashComparer, IHasher } from '../../data/authentication/DbAuthenticationProtocols';
 import bcrypt from 'bcrypt';
 
-export class BcryptAdapter implements IHasher {
+
+export class BcryptAdapter implements IHasher, IHashComparer {
   private readonly salt: number;
 
   constructor(salt: number) {
@@ -12,5 +13,10 @@ export class BcryptAdapter implements IHasher {
   async hash(value: string): Promise<string> {
 
     return await bcrypt.hash(value, this.salt)
+  }
+
+  async compare(value: string, hash: string): Promise<boolean> {
+    await bcrypt.compare(value, hash)
+    return new Promise(resolve => resolve(true))
   }
 }
