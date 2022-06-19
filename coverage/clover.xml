@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1655681078763" clover="3.2.0">
-  <project timestamp="1655681078764" name="All files">
-    <metrics statements="22" coveredstatements="22" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3" elements="29" coveredelements="29" complexity="0" loc="22" ncloc="22" packages="1" files="1" classes="1"/>
+<coverage generated="1655681387272" clover="3.2.0">
+  <project timestamp="1655681387272" name="All files">
+    <metrics statements="21" coveredstatements="21" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3" elements="27" coveredelements="27" complexity="0" loc="21" ncloc="21" packages="1" files="1" classes="1"/>
     <file name="BcryptAdapter.ts" path="/mnt/e2d6f786-c74c-4eed-8796-19c9c85a9c09/Documents/curso_patrico/nodejs/typescript/clean-node-api/src/infra/criptography/BcryptAdapter.ts">
-      <metrics statements="22" coveredstatements="22" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
+      <metrics statements="21" coveredstatements="21" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
@@ -13,8 +13,8 @@
       <line num="7" count="1" type="stmt"/>
       <line num="8" count="1" type="stmt"/>
       <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
-      <line num="10" count="4" type="stmt"/>
-      <line num="11" count="4" type="stmt"/>
+      <line num="10" count="5" type="stmt"/>
+      <line num="11" count="5" type="stmt"/>
       <line num="12" count="1" type="stmt"/>
       <line num="13" count="1" type="cond" truecount="1" falsecount="0"/>
       <line num="14" count="3" type="stmt"/>
@@ -22,10 +22,9 @@
       <line num="16" count="3" type="stmt"/>
       <line num="17" count="1" type="stmt"/>
       <line num="18" count="1" type="cond" truecount="1" falsecount="0"/>
-      <line num="19" count="1" type="stmt"/>
-      <line num="20" count="1" type="cond" truecount="1" falsecount="0"/>
+      <line num="19" count="2" type="stmt"/>
+      <line num="20" count="2" type="stmt"/>
       <line num="21" count="1" type="stmt"/>
-      <line num="22" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>
