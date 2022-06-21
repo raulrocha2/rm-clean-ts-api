@@ -1,4 +1,4 @@
-import bcrypt, { compare } from 'bcrypt'
+import bcrypt from 'bcrypt'
 import { BcryptAdapter } from './BcryptAdapter'
 
 const salt = 12
@@ -62,13 +62,13 @@ describe('Bcrypt Adapter', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  // test('Should return true when compare succeeds', async () => {
-  //   const sut = makeSut()
-  //   jest.spyOn(bcrypt, 'compare').mockReturnValueOnce(
-  //     new Promise(resolve => resolve(false))
-  //   )
-  //   const isValid = await sut.compare('any_value', 'invalid_value')
-  //   expect(isValid).toBe(false)
-  // })
+  test('Should return true when compare succeeds', async () => {
+    const sut = makeSut()
+    jest.spyOn(sut, 'compare').mockReturnValueOnce(
+      new Promise(resolve => resolve(false))
+    )
+    const isValid = await sut.compare('any_value', 'invalid_value')
+    expect(isValid).toBe(false)
+  })
 
 })
