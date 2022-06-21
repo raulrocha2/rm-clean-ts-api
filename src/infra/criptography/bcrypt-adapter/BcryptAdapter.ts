@@ -1,5 +1,5 @@
 
-import { IHashComparer, IHasher } from '../../data/authentication/DbAuthenticationProtocols';
+import { IHashComparer, IHasher } from '../../../data/authentication/DbAuthenticationProtocols';
 import bcrypt from 'bcrypt';
 
 
@@ -16,6 +16,7 @@ export class BcryptAdapter implements IHasher, IHashComparer {
   }
 
   async compare(value: string, hash: string): Promise<boolean> {
-    return await bcrypt.compare(value, hash)
+    const isValid = await bcrypt.compare(value, hash)
+    return isValid;
   }
 }
