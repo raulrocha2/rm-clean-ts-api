@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1655853727443" clover="3.2.0">
-  <project timestamp="1655853727443" name="All files">
+<coverage generated="1655853864486" clover="3.2.0">
+  <project timestamp="1655853864486" name="All files">
     <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2" elements="18" coveredelements="18" complexity="0" loc="14" ncloc="14" packages="1" files="1" classes="1"/>
     <file name="jwtAdapter.ts" path="/mnt/e2d6f786-c74c-4eed-8796-19c9c85a9c09/Documents/curso_patrico/nodejs/typescript/clean-node-api/src/infra/criptography/jwt-adapter/jwtAdapter.ts">
       <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
