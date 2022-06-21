@@ -1,6 +1,6 @@
 
-import { IHashComparer, IHasher } from '../../../data/authentication/DbAuthenticationProtocols';
 import bcrypt from 'bcrypt';
+import { IHashComparer, IHasher } from '../../../data/authentication/DbAuthenticationProtocols';
 
 
 export class BcryptAdapter implements IHasher, IHashComparer {
