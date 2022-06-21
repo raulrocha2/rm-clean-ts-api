@@ -2,5 +2,5 @@ import { IAccountModel, IAddAccountModel } from "../../useCases/addAccount/dbAdd
 
 
 export interface ILoadAccountByEmailRepository {
-  load(email: string): Promise<IAccountModel>
+  loadByEmail(email: string): Promise<IAccountModel>
 }
