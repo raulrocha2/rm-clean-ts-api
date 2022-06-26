@@ -1,5 +1,5 @@
-import { InvalidParamError, MissingParamError } from "../../../error";
-import { badRequest, ok, serverError, unauthorized } from "../../../helpers/http/httpHelper";
+import { InvalidParamError, MissingParamError } from "../../error";
+import { badRequest, ok, serverError, unauthorized } from "../../helpers/http/httpHelper";
 
 import { IHttpRequest, IHttpResponse, IController, IEmailValidator, IAuthentication } from "./LoginProtocols";
 

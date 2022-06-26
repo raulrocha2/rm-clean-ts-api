@@ -1,4 +1,4 @@
-import { IAccountModel } from "../../useCases/addAccount/dbAddAccountProtocols";
+import { IAccountModel } from "../../../authentication/DbAuthenticationProtocols";
 
 
 export interface ILoadAccountByEmailRepository {

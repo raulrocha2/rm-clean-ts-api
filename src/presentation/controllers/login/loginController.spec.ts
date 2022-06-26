@@ -1,7 +1,7 @@
-import { InvalidParamError, MissingParamError } from "../../../error";
+import { InvalidParamError, MissingParamError } from "../../error";
 import { IEmailValidator, IHttpRequest, IAuthentication, IAuthenticationModel } from "./LoginProtocols";
-import { LoginController } from "./login"
-import { badRequest, ok, serverError, unauthorized } from "../../../helpers/http/httpHelper";
+import { LoginController } from "./loginController"
+import { badRequest, ok, serverError, unauthorized } from "../../helpers/http/httpHelper";
 
 
 const makeEmailValidator = (): IEmailValidator => {

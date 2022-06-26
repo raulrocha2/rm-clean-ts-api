@@ -1,7 +1,7 @@
 
 import { IValidation } from "../../presentation/protocols/IValidation";
 import { IEmailValidator } from "../../presentation/protocols/IEmailValidator";
-import { makeSignUpValidation } from "./signUpValidation";
+import { makeSignUpValidation } from "./signUpValidationFactory";
 import {
   CompareFieldsValidation,
   EmailFieldValidation,

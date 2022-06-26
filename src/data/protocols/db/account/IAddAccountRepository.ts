@@ -1,4 +1,4 @@
-import { IAccountModel, IAddAccountModel } from "../../useCases/addAccount/dbAddAccountProtocols";
+import { IAccountModel, IAddAccountModel } from "../../../authentication/DbAuthenticationProtocols";
 
 export interface IAddAccountRepository {
   add(accountData: IAddAccountModel): Promise<IAccountModel>;

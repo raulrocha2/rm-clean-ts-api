@@ -1,6 +1,10 @@
 import { ObjectId } from "mongodb";
-import { ILoadAccountByEmailRepository, IUpdateAccessTokenRepository } from "../../../../data/authentication/DbAuthenticationProtocols";
-import { IAddAccountRepository } from "../../../../data/protocols/db/IAddAccountRepository";
+import {
+  IAddAccountRepository,
+  ILoadAccountByEmailRepository,
+  IUpdateAccessTokenRepository
+} from "../../../../data/authentication/DbAuthenticationProtocols";
+
 import { IAccountModel } from "../../../../domain/models/Account";
 import { IAddAccountModel } from "../../../../domain/useCases/IAddAccount";
 import { MongoHelper } from "../helpers/mongoHelper";
@@ -27,7 +31,7 @@ export class AccountMongoRepository implements IAddAccountRepository, ILoadAccou
   async updateAccessToken(id: string, token: string): Promise<void> {
     const accountCollection = await MongoHelper.getCollection('accounts')
     await accountCollection.updateOne(
-      { "_id": new ObjectId(id) },
+      { _id: new ObjectId(id) },
       { $set: { 'accessToken': token } }
     )
   }

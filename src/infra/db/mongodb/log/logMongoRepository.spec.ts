@@ -1,7 +1,7 @@
 import { Collection } from "mongodb"
-import { ILogErrorRepository } from "../../../../data/protocols/db/ILogErrorRepository"
+import { ILogErrorRepository } from "../../../../data/protocols/db/log/ILogErrorRepository"
 import { MongoHelper } from "../helpers/mongoHelper"
-import { LogMongoRepository } from "./log"
+import { LogMongoRepository } from "./logMongoRepository"
 
 describe('Log Mongo Repository', () => {
 
