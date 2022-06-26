@@ -10,10 +10,10 @@ import {
 
 export class DbAuthentication implements IAuthentication {
   constructor(
-    private loadAccountByEmailRepository: ILoadAccountByEmailRepository,
-    private hashComparer: IHashComparer,
-    private tokenGenerator: ITokenGenerator,
-    private updateAccessToken: IUpdateAccessTokenRepository
+    private readonly loadAccountByEmailRepository: ILoadAccountByEmailRepository,
+    private readonly hashComparer: IHashComparer,
+    private readonly tokenGenerator: ITokenGenerator,
+    private readonly updateAccessToken: IUpdateAccessTokenRepository
   ) { }
 
   async auth({ email, password }: IAuthenticationModel): Promise<string> {
