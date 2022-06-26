@@ -8,8 +8,8 @@ import { IHttpRequest, IHttpResponse, IController, IEmailValidator, IAuthenticat
 export class LoginController implements IController {
 
   constructor(
-    private emailValidator: IEmailValidator,
-    private authentication: IAuthentication
+    private authentication: IAuthentication,
+    private emailValidator: IEmailValidator
   ) { }
 
   async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
