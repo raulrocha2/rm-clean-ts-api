@@ -1,4 +1,3 @@
-import { InvalidParamError, MissingParamError } from "../../error";
 import { badRequest, ok, serverError, unauthorized } from "../../helpers/http/httpHelper";
 import { IValidation } from "../signUp/signUpProtocols";
 

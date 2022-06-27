@@ -6,8 +6,6 @@ import { IValidation } from "../signUp/signUpProtocols";
 
 
 
-
-
 const makeAuthentication = (): IAuthentication => {
   class AuthenticationStub implements IAuthentication {
     async auth(authentication: IAuthenticationModel): Promise<string> {
@@ -26,11 +24,6 @@ const makeFakeRequest = (): IHttpRequest => ({
   }
 })
 
-interface SutTypes {
-  sut: LoginController;
-  authenticationStub: IAuthentication;
-  validationStub: IValidation;
-}
 
 const makeValidation = (): IValidation => {
   class ValidationStub implements IValidation {
@@ -39,6 +32,12 @@ const makeValidation = (): IValidation => {
     }
   }
   return new ValidationStub()
+}
+
+interface SutTypes {
+  sut: LoginController;
+  authenticationStub: IAuthentication;
+  validationStub: IValidation;
 }
 
 
@@ -98,7 +97,7 @@ describe('Login controller', () => {
     });
   })
 
-  test('Should return 500 if an invalid EmailValidator throws', async () => {
+  test('Should return 400 if Validation return an error', async () => {
     const { sut, validationStub } = makeSut()
     jest.spyOn(validationStub, 'validate').mockImplementationOnce(() => {
       throw new Error()
