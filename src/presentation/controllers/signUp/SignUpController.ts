@@ -1,6 +1,6 @@
 
 import { badRequest, ok, serverError } from "../../helpers/http/httpHelper";
-import { IAddAccount, IController, IEmailValidator, IHttpRequest, IHttpResponse, IValidation } from "./signUpProtocols"
+import { IAddAccount, IController, IHttpRequest, IHttpResponse, IValidation } from "./signUpProtocols"
 
 
 
