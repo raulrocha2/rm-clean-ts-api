@@ -16,7 +16,6 @@ export const MongoHelper = {
 
     if (!this.mongoClient) {
       await this.mongoClient.connect(this.uri)
-
     }
     return this.mongoClient.db().collection(name)
   },
