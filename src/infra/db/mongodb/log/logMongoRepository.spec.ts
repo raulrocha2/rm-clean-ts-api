@@ -12,7 +12,7 @@ describe('Log Mongo Repository', () => {
   }
 
   beforeAll(async () => {
-    await MongoHelper.connect('mongodb://localhost:27017/test')
+    await MongoHelper.connect('mongodb://localhost:27017/clean-api-test')
   })
 
   afterAll(async () => {

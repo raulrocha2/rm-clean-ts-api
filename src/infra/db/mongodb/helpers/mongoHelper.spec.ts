@@ -1,7 +1,7 @@
 import env from '../../../../main/config/env'
 import { MongoHelper as sut } from './mongoHelper'
 
-describe('', () => {
+describe('Mongo Helper', () => {
 
   beforeAll(async () => {
     await sut.connect(env.mongoUrl)
@@ -13,10 +13,10 @@ describe('', () => {
 
   test('Should reconnect if mongodb is down', async () => {
 
-    let accountCollection = await sut.getCollection('account')
+    let accountCollection = await sut.getCollection('accounts')
     expect(accountCollection).toBeTruthy()
     await sut.disconnect()
-    accountCollection = await sut.getCollection('account')
+    accountCollection = await sut.getCollection('accounts')
     expect(accountCollection).toBeTruthy()
 
   })
