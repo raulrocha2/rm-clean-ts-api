@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "sucrase-node src/main/server.ts",
+    "start": "node dist/main/server.js",
+    "build": "rimraf dist && tsc",
+    "dev": "sucrase-node src/main/server.ts",
     "test": "jest --silent --noStackTrace --runInBand",
     "test:verbose": "jest --runInBand",
     "test:unit": "yarn jest -- --watch -c jest-unit.config.ts",
@@ -37,6 +39,7 @@
     "husky": "^7.0.4",
     "jest": "^27.5.1",
     "lint-staged": "^12.3.7",
+    "rimraf": "^3.0.2",
     "sucrase": "^3.21.0",
     "supertest": "^6.2.3",
     "ts-jest": "^27.1.4",
@@ -45,7 +48,6 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "express": "^4.18.0",
-    "fast-glob": "^3.2.11",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.5.0",
     "node-cron": "^3.0.0",
