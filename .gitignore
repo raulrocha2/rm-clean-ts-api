@@ -2,3 +2,5 @@ node_modules
 dist
 coverage
 *.txt
+package-lock.json
+yarn.lock

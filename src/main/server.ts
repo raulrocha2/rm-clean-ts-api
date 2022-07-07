@@ -1,7 +1,6 @@
-import { MongoHelper } from "../infra/db/mongodb/helpers/mongoHelper";
+import { MongoHelper } from '../infra/db/mongodb/helpers/mongoHelper'
 
-import env from "./config/env";
-
+import env from './config/env'
 
 MongoHelper.connect(env.mongoUrl)
   .then(async () => {
@@ -9,4 +8,3 @@ MongoHelper.connect(env.mongoUrl)
     app.listen(env.port, () => console.log(`Server running at http://localhost:${env.port}`))
   })
   .catch(console.error)
-
