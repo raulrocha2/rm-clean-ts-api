@@ -1,0 +1,28 @@
+version: "3"
+services:
+  mongo:
+    container_name: mongo-database
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: docker
+      MONGO_INITDB_ROOT_PASSWORD: docker123456
+    volumes:
+      - ~/mongo-data:/data/db
+    ports:
+      - 27017:27017
+
+  api:
+    container_name: api-clean-node-container
+    build: .
+    image: clean-node-api
+    volumes:
+      - ./dist:/user/src/app/dist
+    ports:
+      - 5050:5050
+      - 5000:5000
+    command: npm start
+    links:
+      - mongo
+    depends_on:
+      - mongo
