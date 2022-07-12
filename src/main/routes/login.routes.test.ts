@@ -1,8 +1,8 @@
-import { hash } from "bcrypt"
-import { Collection } from "mongodb"
-import request from "supertest"
-import { MongoHelper } from "../../infra/db/mongodb/helpers/mongoHelper"
-import { app } from "../config/app"
+import { hash } from 'bcrypt'
+import { Collection } from 'mongodb'
+import request from 'supertest'
+import { MongoHelper } from '../../infra/db/mongodb/helpers/mongoHelper'
+import { app } from '../config/app'
 
 let accountCollection: Collection
 
@@ -30,7 +30,6 @@ describe('POST /signup', () => {
         passwordConfirm: '123'
       })
       .expect(200)
-
   })
 })
 
@@ -60,6 +59,5 @@ describe('POST /login', () => {
         password: '123'
       })
       .expect(401)
-
   })
 })

@@ -1,26 +1,19 @@
-import { ILogErrorRepository } from "../../data/protocols/db/log/ILogErrorRepository"
-import { IAccountModel } from "../../domain/models/Account"
-import { ok, serverError } from "../../presentation/helpers/http/httpHelper"
-import { IController, IHttpRequest, IHttpResponse } from "../../presentation/protocols"
-import { LogControllerDecorator } from "./LogControllerDecorator"
-
+import { ILogErrorRepository } from '../../data/protocols/db/log/ILogErrorRepository'
+import { IAccountModel } from '../../domain/models/Account'
+import { ok, serverError } from '../../presentation/helpers/http/httpHelper'
+import { IController, IHttpRequest, IHttpResponse } from '../../presentation/protocols'
+import { LogControllerDecorator } from './LogControllerDecorator'
 
 interface SutTypes {
-  sut: LogControllerDecorator,
-  controllerStub: IController,
+  sut: LogControllerDecorator
+  controllerStub: IController
   logErrorRepositoryStub: ILogErrorRepository
 }
 
 const makeController = (): IController => {
   class ControllerStub implements IController {
-    handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-      const httpResponse: IHttpResponse = {
-        statusCode: 200,
-        body: {
-          name: 'valid_name'
-        }
-      }
-      return new Promise(resolve => resolve(ok(makeFakeAccount())))
+    async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
+      return await new Promise(resolve => resolve(ok(makeFakeAccount())))
     }
   }
 
@@ -30,8 +23,7 @@ const makeController = (): IController => {
 const makeLogErrorRepository = (): ILogErrorRepository => {
   class LogErrorRepositoryStub implements ILogErrorRepository {
     async logError(stack: string): Promise<void> {
-
-      return new Promise(resolve => resolve())
+      return await new Promise(resolve => resolve())
     }
   }
 
@@ -39,7 +31,6 @@ const makeLogErrorRepository = (): ILogErrorRepository => {
 }
 
 const makeSut = (): SutTypes => {
-
   const controllerStub = makeController()
   const logErrorRepositoryStub = makeLogErrorRepository()
   const sut = new LogControllerDecorator(controllerStub, logErrorRepositoryStub)
@@ -49,8 +40,6 @@ const makeSut = (): SutTypes => {
     logErrorRepositoryStub
   }
 }
-
-
 
 const makeFakeRequest = (): IHttpRequest => ({
 
@@ -65,7 +54,7 @@ const makeFakeRequest = (): IHttpRequest => ({
 
 const makeFakeAccount = (): IAccountModel => ({
 
-  id: "valid_id",
+  id: 'valid_id',
   name: 'valid_name',
   email: 'valid_email@mail.com',
   password: 'valid_password'
@@ -79,7 +68,6 @@ const makeFakeServerError = (): IHttpResponse => {
 }
 
 describe('Log Controller Decorator', () => {
-
   test('should call controller handle', async () => {
     const { sut, controllerStub } = makeSut()
     const handleSpy = jest.spyOn(controllerStub, 'handle')
