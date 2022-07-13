@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc",
-    "debug": "node --inspect=0.0.0.0:9222 --nolazy dist/main/server.js",
+    "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9222 --nolazy ./dist/main/server.js",
     "up": "npm run build && docker-compose up -d",
-    "stop": "docker-compose down",
+    "down": "docker-compose down",
     "test": "jest --silent --noStackTrace --runInBand",
     "test:verbose": "jest --runInBand",
     "test:unit": "yarn jest -- --watch -c jest-unit.config.ts",
@@ -52,6 +52,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.5.0",
     "node-cron": "^3.0.0",
+    "nodemon": "^2.0.19",
     "ts-node": "^10.7.0",
     "validator": "^13.7.0"
   },

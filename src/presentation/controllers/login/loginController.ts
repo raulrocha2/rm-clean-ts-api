@@ -1,15 +1,12 @@
-import { badRequest, ok, serverError, unauthorized } from "../../helpers/http/httpHelper";
-import { IValidation } from "../signUp/signUpProtocols";
+import { badRequest, ok, serverError, unauthorized } from '../../helpers/http/httpHelper'
+import { IValidation } from '../signUp/signUpProtocols'
 
-import { IHttpRequest, IHttpResponse, IController, IEmailValidator, IAuthentication } from "./LoginProtocols";
-
-
+import { IHttpRequest, IHttpResponse, IController, IAuthentication } from './LoginProtocols'
 
 export class LoginController implements IController {
-
   constructor(
-    private authentication: IAuthentication,
-    private validation: IValidation
+    private readonly authentication: IAuthentication,
+    private readonly validation: IValidation
   ) { }
 
   async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
@@ -32,5 +29,4 @@ export class LoginController implements IController {
       return serverError(error)
     }
   }
-
 }
