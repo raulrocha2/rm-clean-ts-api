@@ -2,7 +2,7 @@
 import { IAccountModel } from '../../../domain/models/Account'
 import { IAddAccount, IAddAccountModel } from '../../../domain/useCases/IAddAccount'
 import { MissingParamError, ServerError } from '../../error'
-import { badRequest, ok } from '../../helpers/http/httpHelper'
+import { badRequest, ok, serverError } from '../../helpers/http/httpHelper'
 
 import { SignUpController } from './SignUpController'
 import { IHttpRequest, IValidation, IAuthentication, IAuthenticationModel } from './signUpProtocols'
@@ -145,5 +145,15 @@ describe('SingUp Controller', () => {
       email: 'any_email@mail.com',
       password: 'any_password'
     })
+  })
+
+  test('Should return 500 if Authentication throws', async () => {
+    const { sut, authenticationStub } = makeSut()
+    jest.spyOn(authenticationStub, 'auth').mockReturnValueOnce(
+      new Promise((resolve, reject) => reject(new Error()))
+    )
+
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
