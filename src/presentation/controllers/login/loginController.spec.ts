@@ -48,6 +48,17 @@ const makeSut = (): SutTypes => {
 }
 
 describe('Login controller', () => {
+  test('Should call Authentication with correct values', async () => {
+    const { sut, authenticationStub } = makeSut()
+    const authSpy = jest.spyOn(authenticationStub, 'auth')
+
+    await sut.handle(makeFakeRequest())
+    expect(authSpy).toHaveBeenCalledWith({
+      email: 'any_email@test.com',
+      password: 'any_password'
+    })
+  })
+
   test('Should return 400 if no email is provided', async () => {
     const { sut, validationStub } = makeSut()
     jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('email'))
