@@ -1,8 +1,9 @@
+/* eslint-disable promise/param-names */
 
 import { IAccountModel } from '../../../domain/models/Account'
 import { IAddAccount, IAddAccountModel } from '../../../domain/useCases/IAddAccount'
-import { MissingParamError, ServerError } from '../../error'
-import { badRequest, ok, serverError } from '../../helpers/http/httpHelper'
+import { EmailExistError, MissingParamError, ServerError } from '../../error'
+import { badRequest, forbidden, ok, serverError } from '../../helpers/http/httpHelper'
 
 import { SignUpController } from './SignUpController'
 import { IHttpRequest, IValidation, IAuthentication, IAuthenticationModel } from './signUpProtocols'
@@ -18,7 +19,7 @@ const makeFakeAccount = (): IAccountModel => ({
 
 const makeAddAccount = (): IAddAccount => {
   class AddAccountStub implements IAddAccount {
-    async add(account: IAddAccountModel): Promise<IAccountModel> {
+    async add (account: IAddAccountModel): Promise<IAccountModel> {
       return await new Promise(resolve => resolve(makeFakeAccount()))
     }
   }
@@ -27,7 +28,7 @@ const makeAddAccount = (): IAddAccount => {
 
 const makeValidation = (): IValidation => {
   class ValidationStub implements IValidation {
-    validate(input: any): Error {
+    validate (input: any): Error {
       return null
     }
   }
@@ -36,7 +37,7 @@ const makeValidation = (): IValidation => {
 
 const makeAuthentication = (): IAuthentication => {
   class AuthenticationStub implements IAuthentication {
-    async auth(authentication: IAuthenticationModel): Promise<string> {
+    async auth (authentication: IAuthenticationModel): Promise<string> {
       return 'any_token'
     }
   }
@@ -111,8 +112,14 @@ describe('SingUp Controller', () => {
     expect(httpResponse.body).toEqual(new ServerError(httpResponse.body))
   })
 
+  test('Should return 403 if AddAccount returns null', async () => {
+    const { sut, addAccountStub } = makeSut()
+    jest.spyOn(addAccountStub, 'add').mockReturnValueOnce(new Promise(resolve => resolve(null)))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(forbidden(new EmailExistError()))
+  })
+
   test('Should return 201 if valid data Account is provided', async () => {
-    // System Under Test
     const { sut } = makeSut()
     const httpRequest = makeFakeRequest()
     const httpResponse = await sut.handle(httpRequest)
