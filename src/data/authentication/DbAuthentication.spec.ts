@@ -1,5 +1,5 @@
 
-import { DbAuthentication } from "./DbAuthentication"
+import { DbAuthentication } from './DbAuthentication'
 import {
   IAccountModel,
   IAuthenticationModel,
@@ -7,14 +7,13 @@ import {
   ILoadAccountByEmailRepository,
   ITokenGenerator,
   IUpdateAccessTokenRepository
-} from "./DbAuthenticationProtocols"
-
+} from './DbAuthenticationProtocols'
 
 const makeLoadAccountByEmailRepository = (): ILoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements ILoadAccountByEmailRepository {
-    async loadByEmail(email: string): Promise<IAccountModel> {
+    async loadByEmail (email: string): Promise<IAccountModel> {
       const account = makeFakeAccount()
-      return new Promise(resolve => resolve(account))
+      return await new Promise(resolve => resolve(account))
     }
   }
   return new LoadAccountByEmailRepositoryStub()
@@ -22,8 +21,8 @@ const makeLoadAccountByEmailRepository = (): ILoadAccountByEmailRepository => {
 
 const makeHashComparer = (): IHashComparer => {
   class HashComparerStub implements IHashComparer {
-    async compare(value: string, hash: string): Promise<boolean> {
-      return new Promise(resolve => resolve(true))
+    async compare (value: string, hash: string): Promise<boolean> {
+      return await new Promise(resolve => resolve(true))
     }
   }
   return new HashComparerStub()
@@ -31,8 +30,8 @@ const makeHashComparer = (): IHashComparer => {
 
 const makeTokenGenerator = (): ITokenGenerator => {
   class TokenGeneratorStub implements ITokenGenerator {
-    async generate(id: string): Promise<string> {
-      return new Promise(resolve => resolve('any_token'))
+    async generate (id: string): Promise<string> {
+      return await new Promise(resolve => resolve('any_token'))
     }
   }
   return new TokenGeneratorStub()
@@ -40,8 +39,8 @@ const makeTokenGenerator = (): ITokenGenerator => {
 
 const makeUpdateAccessTokenRepository = (): IUpdateAccessTokenRepository => {
   class UpdateAccessTokenRepository implements IUpdateAccessTokenRepository {
-    async updateAccessToken(id: string, token: string): Promise<void> {
-      return new Promise(resolve => resolve())
+    async updateAccessToken (id: string, token: string): Promise<void> {
+      return await new Promise(resolve => resolve())
     }
   }
   return new UpdateAccessTokenRepository()
@@ -59,12 +58,11 @@ const makeFakeAuthentication = (): IAuthenticationModel => ({
   password: 'any_password'
 })
 
-
-type SutTypes = {
-  loadAccountByEmailRepository: ILoadAccountByEmailRepository,
-  sut: DbAuthentication,
-  hashComparerStub: IHashComparer,
-  tokenGeneratorStub: ITokenGenerator,
+interface SutTypes {
+  loadAccountByEmailRepository: ILoadAccountByEmailRepository
+  sut: DbAuthentication
+  hashComparerStub: IHashComparer
+  tokenGeneratorStub: ITokenGenerator
   updateAccessTokenRepositoryStub: IUpdateAccessTokenRepository
 }
 
@@ -89,7 +87,6 @@ const makeSut = (): SutTypes => {
 }
 
 describe('DbAuthentication UseCase', () => {
-
   test('Should call LoadAccountByEmailRepository with correct email', async () => {
     const { loadAccountByEmailRepository, sut } = makeSut()
     const loadSpy = jest.spyOn(loadAccountByEmailRepository, 'loadByEmail')
@@ -175,5 +172,4 @@ describe('DbAuthentication UseCase', () => {
     const promise = sut.auth(makeFakeAuthentication())
     await expect(promise).rejects.toThrow()
   })
-
 })

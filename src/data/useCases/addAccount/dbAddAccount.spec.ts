@@ -1,9 +1,15 @@
-import { DbAddAccount } from "./DbAddAccount";
-import { IAccountModel, IAddAccountModel, IAddAccountRepository, IHasher } from "./dbAddAccountProtocols";
+import { DbAddAccount } from './DbAddAccount'
+import {
+  IAccountModel,
+  IAddAccountModel,
+  IAddAccountRepository,
+  IHasher,
+  ILoadAccountByEmailRepository
+} from './dbAddAccountProtocols'
 
 class HasherStub implements IHasher {
-  async hash(value: string): Promise<string> {
-    return new Promise(resolve => resolve('hashed_password'))
+  async hash (value: string): Promise<string> {
+    return await new Promise(resolve => resolve('hashed_password'))
   }
 }
 
@@ -15,25 +21,38 @@ const makeFakeAccount = (): IAccountModel => ({
 })
 
 class AddAccountRepositoryStub implements IAddAccountRepository {
-  async add(accountData: IAddAccountModel): Promise<IAccountModel> {
-    return new Promise(resolve => resolve(makeFakeAccount()))
+  async add (accountData: IAddAccountModel): Promise<IAccountModel> {
+    return await new Promise(resolve => resolve(makeFakeAccount()))
   }
 }
 
+const makeLoadAccountByEmailRepository = (): ILoadAccountByEmailRepository => {
+  class LoadAccountByEmailRepositoryStub implements ILoadAccountByEmailRepository {
+    async loadByEmail (email: string): Promise<IAccountModel> {
+      const account = makeFakeAccount()
+      return await new Promise(resolve => resolve(account))
+    }
+  }
+  return new LoadAccountByEmailRepositoryStub()
+}
+
 class SutTypes {
-  sut: DbAddAccount;
-  hasherStub: IHasher;
-  addAccountRepositoryStub: IAddAccountRepository;
+  sut: DbAddAccount
+  hasherStub: IHasher
+  addAccountRepositoryStub: IAddAccountRepository
+  loadAccountByEmailRepository: ILoadAccountByEmailRepository
 }
 
 const makeSut = (): SutTypes => {
   const hasherStub = new HasherStub()
+  const loadAccountByEmailRepository = makeLoadAccountByEmailRepository()
   const addAccountRepositoryStub = new AddAccountRepositoryStub()
-  const sut = new DbAddAccount(hasherStub, addAccountRepositoryStub)
+  const sut = new DbAddAccount(hasherStub, addAccountRepositoryStub, loadAccountByEmailRepository)
   return {
     sut,
     hasherStub,
-    addAccountRepositoryStub
+    addAccountRepositoryStub,
+    loadAccountByEmailRepository
   }
 }
 
@@ -52,7 +71,7 @@ describe('DbAddAccount UseCase', () => {
     const hasherSpy = jest.spyOn(hasherStub, 'hash')
     await sut.add(makeFakeAccountData())
     expect(hasherSpy).toHaveBeenCalledWith('valid_password')
-  });
+  })
 
   test('Should throw if Hasher throws', async () => {
     const { sut, hasherStub } = makeSut()
@@ -60,8 +79,8 @@ describe('DbAddAccount UseCase', () => {
       new Promise((resolve, reject) => reject(new Error()))
     )
     const promise = sut.add(makeFakeAccountData())
-    expect(promise).rejects.toThrow()
-  });
+    await expect(promise).rejects.toThrow()
+  })
 
   test('Should call AddAccountRepository with correct values', async () => {
     const { sut, addAccountRepositoryStub } = makeSut()
@@ -73,7 +92,7 @@ describe('DbAddAccount UseCase', () => {
       email: 'new_email@mail.com',
       password: 'hashed_password'
     })
-  });
+  })
 
   test('Should throw if AddAccountRepository throws', async () => {
     const { sut, addAccountRepositoryStub } = makeSut()
@@ -81,8 +100,8 @@ describe('DbAddAccount UseCase', () => {
       new Promise((resolve, reject) => reject(new Error()))
     )
     const promise = sut.add(makeFakeAccountData())
-    expect(promise).rejects.toThrow()
-  });
+    await expect(promise).rejects.toThrow()
+  })
 
   test('Should return an account on success', async () => {
     const { sut } = makeSut()
@@ -93,6 +112,11 @@ describe('DbAddAccount UseCase', () => {
       email: 'new_email@mail.com',
       password: 'hashed_password'
     })
-  });
-
+  })
+  test('Should call LoadAccountByEmailRepository with correct email', async () => {
+    const { loadAccountByEmailRepository, sut } = makeSut()
+    const loadSpy = jest.spyOn(loadAccountByEmailRepository, 'loadByEmail')
+    await sut.add(makeFakeAccount())
+    expect(loadSpy).toHaveBeenCalledWith('new_email@mail.com')
+  })
 })
