@@ -1,6 +1,5 @@
-import { IAccountModel } from "../../../authentication/DbAuthenticationProtocols";
-
+import { IAccountModel } from '../../../authentication/DbAuthenticationProtocols'
 
 export interface ILoadAccountByEmailRepository {
-  loadByEmail(email: string): Promise<IAccountModel>
+  loadByEmail: (email: string) => Promise<IAccountModel>
 }

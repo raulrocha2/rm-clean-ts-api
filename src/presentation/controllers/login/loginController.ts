@@ -4,12 +4,12 @@ import { IValidation } from '../signUp/signUpProtocols'
 import { IHttpRequest, IHttpResponse, IController, IAuthentication } from './LoginProtocols'
 
 export class LoginController implements IController {
-  constructor(
+  constructor (
     private readonly authentication: IAuthentication,
     private readonly validation: IValidation
   ) { }
 
-  async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
+  async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     try {
       const error = this.validation.validate(httpRequest.body)
       if (error) {
