@@ -5,18 +5,17 @@ import {
   ILoadAccountByEmailRepository,
   ITokenGenerator,
   IUpdateAccessTokenRepository
-} from "./DbAuthenticationProtocols"
-
+} from './DbAuthenticationProtocols'
 
 export class DbAuthentication implements IAuthentication {
-  constructor(
+  constructor (
     private readonly loadAccountByEmailRepository: ILoadAccountByEmailRepository,
     private readonly hashComparer: IHashComparer,
     private readonly tokenGenerator: ITokenGenerator,
     private readonly updateAccessToken: IUpdateAccessTokenRepository
   ) { }
 
-  async auth({ email, password }: IAuthenticationModel): Promise<string> {
+  async auth ({ email, password }: IAuthenticationModel): Promise<string> {
     const account = await this.loadAccountByEmailRepository.loadByEmail(email)
     if (account) {
       const isValid = await this.hashComparer.compare(password, account.password)
