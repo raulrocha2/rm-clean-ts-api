@@ -1,10 +1,10 @@
-import { MissingParamError } from "../../error"
-import { RequiredFieldValidation } from "./RequiredFieldValidation"
+
+import { MissingParamError } from '../../presentation/error'
+import { RequiredFieldValidation } from './RequiredFieldValidation'
 
 const makeSut = (): RequiredFieldValidation => {
   return new RequiredFieldValidation('field')
 }
-
 
 describe('Required Field Validation', () => {
   test('Should return a MissingParamError if validation fails', () => {

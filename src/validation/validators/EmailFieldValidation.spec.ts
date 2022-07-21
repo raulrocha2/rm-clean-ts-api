@@ -1,11 +1,11 @@
-import { InvalidParamError } from "../../error";
-import { IEmailValidator } from "../../protocols/IEmailValidator";
-import { EmailFieldValidation } from "./EmailFieldValidation";
+import { InvalidParamError } from '../../presentation/error'
+import { IEmailValidator } from '../protocols/IEmailValidator'
 
+import { EmailFieldValidation } from './EmailFieldValidation'
 
 const makeEmailValidator = (): IEmailValidator => {
   class EmailValidatorStub implements IEmailValidator {
-    isValid(email: string): boolean {
+    isValid (email: string): boolean {
       return true
     }
   }
@@ -28,7 +28,6 @@ const makeSut = (): SutTypes => {
 }
 
 describe('Email Field Validation', () => {
-
   test('Should return an error if EmailValidator returns false', () => {
     const { emailValidatorStub, sut } = makeSut()
     jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)

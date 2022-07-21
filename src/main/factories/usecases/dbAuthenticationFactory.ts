@@ -1,4 +1,4 @@
-import { env } from 'process'
+import env from '../../config/env'
 import { DbAuthentication } from '../../../data/authentication/DbAuthentication'
 import { IAuthentication } from '../../../domain/useCases/IAuthentication'
 import { BcryptAdapter } from '../../../infra/criptography/bcrypt-adapter/BcryptAdapter'

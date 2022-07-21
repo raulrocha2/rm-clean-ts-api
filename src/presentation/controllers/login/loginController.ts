@@ -26,6 +26,7 @@ export class LoginController implements IController {
 
       return ok({ accessToken })
     } catch (error) {
+      console.error(error)
       return serverError(error)
     }
   }

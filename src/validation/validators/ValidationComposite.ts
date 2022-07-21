@@ -1,13 +1,11 @@
-import { IValidation } from "../../protocols/IValidation"
-
+import { IValidation } from '../../presentation/protocols/IValidation'
 
 export class ValidationComposite implements IValidation {
-  constructor(
-    private validations: IValidation[]
+  constructor (
+    private readonly validations: IValidation[]
   ) { }
 
-
-  validate(input: any): Error {
+  validate (input: any): Error {
     for (const validation of this.validations) {
       const error = validation.validate(input)
       if (error) {
@@ -15,5 +13,4 @@ export class ValidationComposite implements IValidation {
       }
     }
   }
-
 }

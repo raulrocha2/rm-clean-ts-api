@@ -1,4 +1,3 @@
-
 export default {
   bail: true,
   coverageProvider: "v8",
@@ -15,5 +14,8 @@ export default {
   transform: {
     '.+\\.ts$': 'ts-jest'
   },
-  testMatch: ["**/*.spec.ts"],
+  testMatch: [
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ]
 };

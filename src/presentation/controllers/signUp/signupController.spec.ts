@@ -1,5 +1,4 @@
 /* eslint-disable promise/param-names */
-
 import { IAccountModel } from '../../../domain/models/Account'
 import { IAddAccount, IAddAccountModel } from '../../../domain/useCases/IAddAccount'
 import { EmailExistError, MissingParamError, ServerError } from '../../error'
